@@ -10,7 +10,8 @@ import {
 import { ActorsService } from './actors.service';
 import { CreateActorDto } from './dto/create-actor.dto';
 import { UpdateActorDto } from './dto/update-actor.dto';
-import { ApiTags } from '@nestjs/swagger';
+import { ApiCreatedResponse, ApiOkResponse, ApiTags } from '@nestjs/swagger';
+import { Actor } from './entities/actor.entity';
 
 @ApiTags('actors')
 @Controller('actors')
@@ -18,16 +19,29 @@ export class ActorsController {
   constructor(private readonly actorsService: ActorsService) {}
 
   @Post()
+  @ApiCreatedResponse({
+    description: 'Successfully created an Actor.',
+    type: Actor,
+  })
   create(@Body() createActorDto: CreateActorDto) {
     return this.actorsService.create(createActorDto);
   }
 
   @Get()
+  @ApiOkResponse({
+    description: 'Successfully retrieved list of all Actors.',
+    type: Actor,
+    isArray: true,
+  })
   findAll() {
     return this.actorsService.findAll();
   }
 
   @Get(':id')
+  @ApiOkResponse({
+    description: 'Successfully retrieved a single Actor.',
+    type: Actor,
+  })
   findOne(@Param('id') id: string) {
     return this.actorsService.findOne(+id);
   }
