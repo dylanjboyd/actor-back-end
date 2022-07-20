@@ -38,7 +38,7 @@ export class MoviesController {
   }
 
   @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.moviesService.remove(+id);
+  async remove(@Param('id') id: string) {
+    await this.moviesService.remove(+id);
   }
 }

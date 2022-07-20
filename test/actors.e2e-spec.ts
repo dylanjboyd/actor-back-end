@@ -4,6 +4,12 @@ import * as request from 'supertest';
 import { AppModule } from '../src/app.module';
 import { generateCreateActorDto } from './test-data-factory';
 
+/*
+NOTE: The use of mixed endpoint calls in the below tests, though violating
+the single responsibility principle, is deemed acceptable for the simplicity of
+this challenge.
+ */
+
 describe('ActorsController (e2e)', () => {
   let app: INestApplication;
 
@@ -35,5 +41,24 @@ describe('ActorsController (e2e)', () => {
       .get('/actors')
       .expect(200)
       .expect([expectedActor]);
+  });
+
+  it('/actors (DELETE)', async () => {
+    const expectedActor = {
+      ...generateCreateActorDto(),
+      id: 1,
+    };
+    await request(app.getHttpServer())
+      .post('/actors')
+      .send(generateCreateActorDto())
+      .expect(201)
+      .expect(expectedActor);
+
+    await request(app.getHttpServer())
+      .delete('/actors/1')
+      .expect(200)
+      .expect({});
+
+    await request(app.getHttpServer()).get('/actors').expect(200).expect([]);
   });
 });

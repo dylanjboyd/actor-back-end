@@ -38,7 +38,7 @@ export class ActorsController {
   }
 
   @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.actorsService.remove(+id);
+  async remove(@Param('id') id: string) {
+    await this.actorsService.remove(+id);
   }
 }
