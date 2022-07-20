@@ -61,4 +61,32 @@ describe('ActorsController (e2e)', () => {
 
     await request(app.getHttpServer()).get('/actors').expect(200).expect([]);
   });
+
+  it('/actors (PATCH)', async () => {
+    const expectedActor = {
+      ...generateCreateActorDto(),
+      id: 1,
+    };
+    const modifiedActorDto = {
+      ...generateCreateActorDto(),
+      name: 'Test actor',
+    };
+
+    await request(app.getHttpServer())
+      .post('/actors')
+      .send(generateCreateActorDto())
+      .expect(201)
+      .expect(expectedActor);
+
+    await request(app.getHttpServer())
+      .patch('/actors/1')
+      .send(modifiedActorDto)
+      .expect(200)
+      .expect({});
+
+    await request(app.getHttpServer())
+      .get('/actors')
+      .expect(200)
+      .expect([{ ...modifiedActorDto, id: 1 }]);
+  });
 });

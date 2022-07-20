@@ -33,8 +33,11 @@ export class ActorsController {
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateActorDto: UpdateActorDto) {
-    return this.actorsService.update(+id, updateActorDto);
+  async update(
+    @Param('id') id: string,
+    @Body() updateActorDto: UpdateActorDto,
+  ) {
+    await this.actorsService.update(+id, updateActorDto);
   }
 
   @Delete(':id')
