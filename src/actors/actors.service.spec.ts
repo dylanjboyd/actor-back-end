@@ -30,7 +30,7 @@ describe('ActorsService', () => {
     service = module.get<ActorsService>(ActorsService);
   });
 
-  it('should create a actor', () => {
+  it('should create an actor', () => {
     // Arrange
     const actorDto = generateCreateActorDto();
 
@@ -77,7 +77,7 @@ describe('ActorsService', () => {
     expect(actorRepositoryMock.update).toBeCalledWith({ id: 1 }, actorDto);
   });
 
-  it('should remove a actor', () => {
+  it('should remove an actor', () => {
     // Arrange
     actorRepositoryMock.delete = jest.fn();
 
