@@ -10,7 +10,9 @@ import {
 import { ActorsService } from './actors.service';
 import { CreateActorDto } from './dto/create-actor.dto';
 import { UpdateActorDto } from './dto/update-actor.dto';
+import { ApiTags } from '@nestjs/swagger';
 
+@ApiTags('actors')
 @Controller('actors')
 export class ActorsController {
   constructor(private readonly actorsService: ActorsService) {}

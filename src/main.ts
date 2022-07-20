@@ -9,9 +9,6 @@ async function bootstrap() {
     .setTitle('Actor Back End')
     .setDescription('Gives not-so-real information about actors and movies')
     .setVersion('1.0')
-    .addTag('actors')
-    .addTag('movies')
-    .addTag('film')
     .build();
   const document = SwaggerModule.createDocument(app, config);
   SwaggerModule.setup('api', app, document);
