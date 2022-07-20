@@ -1,73 +1,46 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="200" alt="Nest Logo" /></a>
-</p>
+# Actor Back End
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
+This is an API back-end using NestJS and an in-memory SQLite database. It stores actor and movie information, whose
+schemas are loosely based on [TMDB API models](https://developers.themoviedb.org/3).
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://coveralls.io/github/nestjs/nest?branch=master" target="_blank"><img src="https://coveralls.io/repos/github/nestjs/nest/badge.svg?branch=master#9" alt="Coverage" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+![Actor Back End](./screenshot.png)
 
-## Description
+## Requirements
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+- Internet access is required to install dependencies, but the API itself is standalone.
+- Node.JS 16 and npm
 
-## Installation
+## Running the Application
 
-```bash
-$ npm install
-```
+1. Clone this repository.
+2. Run `npm install` in the root of the cloned directory.
+3. Run `npm start`.
+4. (optional) Access Swagger UI at `http://localhost:3000/api`.
 
-## Running the app
+## Running Unit Tests
 
-```bash
-# development
-$ npm run start
+Run `npm test` in the root of the cloned directory, assuming that `npm install` has been run.
 
-# watch mode
-$ npm run start:dev
+## Running End-to-End Tests
 
-# production mode
-$ npm run start:prod
-```
+Run `npm run test:e2e` in the root of the cloned directory, assuming that `npm install` has been run.
 
-## Test
+## External Libraries
 
-```bash
-# unit tests
-$ npm run test
+- [@nestjs/core](https://www.npmjs.com/package/@nestjs/core): This and other sibling libraries allow NestJS to work.
+- [@nestjs/mapped-types](https://www.npmjs.com/package/@nestjs/mapped-types): Allows for painless mapping from DTOs to database entities.
+- [@nestjs/swagger](https://www.npmjs.com/package/@nestjs/swagger): Enables Swagger to dynamically generate interactive API documentation.
+- [@nestjs/typeorm](https://www.npmjs.com/package/@nestjs/typeorm): Uses the very effective [TypeORM](https://typeorm.io) to interact with the database using a readable JavaScript API.
+- [helmet](https://www.npmjs.com/package/helmet): Applies a broad-stroke blanket of security by adding security headers and handling unsafe requests.
+- [mysql2](https://www.npmjs.com/package/mysql2): Enables use of the in-memory database.
+- [eslint](https://www.npmjs.com/package/eslint): Ensures correctness of TypeScript source code (for development).
+- [prettier](https://www.npmjs.com/package/prettier): Eases code formatting and consistency (for development).
+- [supertest](https://www.npmjs.com/package/supertest): Makes end-to-end API testing easy and simple.
 
-# e2e tests
-$ npm run test:e2e
+## Assumptions
 
-# test coverage
-$ npm run test:cov
-```
-
-## Support
-
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
-
-## Stay in touch
-
-- Author - [Kamil Myśliwiec](https://kamilmysliwiec.com)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
-
-## License
-
-Nest is [MIT licensed](LICENSE).
+- Adding the many-to-many relation between an `Actor` and a `Movie` has value for theoretical future development, even though it's not utilised in this example.
+- The use of mixed endpoint calls in the end-to-end tests, though violating the single responsibility principle, is deemed acceptable for the level of simplicity of this challenge.
+- Error handling can also be ignored for the simplicity of the sample challenge, though this would be vigorously covered in a realistic production scenario.
+- The same goes as above for authentication and authorisation.
+- The similarity between controllers, services, and tests between actor-related and movie-related code would be likely to change as the models and API logic change, and so isn't worth abstracting into a common set of code.
