@@ -14,7 +14,7 @@ describe('ActorsService', () => {
 
   beforeEach(async () => {
     actorRepositoryMock = {
-      create: jest.fn(),
+      save: jest.fn(),
     };
 
     const module: TestingModule = await Test.createTestingModule({
@@ -38,7 +38,7 @@ describe('ActorsService', () => {
     service.create(actorDto);
 
     // Assert
-    expect(actorRepositoryMock.create).toBeCalledWith(actorDto);
+    expect(actorRepositoryMock.save).toBeCalledWith(actorDto);
   });
 
   it('should find all actors', () => {

@@ -14,7 +14,7 @@ describe('MoviesService', () => {
 
   beforeEach(async () => {
     movieRepositoryMock = {
-      create: jest.fn(),
+      save: jest.fn(),
     };
 
     const module: TestingModule = await Test.createTestingModule({
@@ -38,7 +38,7 @@ describe('MoviesService', () => {
     service.create(movieDto);
 
     // Assert
-    expect(movieRepositoryMock.create).toBeCalledWith(movieDto);
+    expect(movieRepositoryMock.save).toBeCalledWith(movieDto);
   });
 
   it('should find all movies', () => {

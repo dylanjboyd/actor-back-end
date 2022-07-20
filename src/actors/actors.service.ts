@@ -12,7 +12,7 @@ export class ActorsService {
     private actorsRepository: Repository<Actor>,
   ) {}
   create(createActorDto: CreateActorDto) {
-    return this.actorsRepository.create(createActorDto);
+    return this.actorsRepository.save({ ...createActorDto });
   }
 
   findAll() {

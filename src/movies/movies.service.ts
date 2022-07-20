@@ -12,7 +12,7 @@ export class MoviesService {
     private moviesRepository: Repository<Movie>,
   ) {}
   create(createMovieDto: CreateMovieDto) {
-    return this.moviesRepository.create(createMovieDto);
+    return this.moviesRepository.save({ ...createMovieDto });
   }
 
   findAll() {
